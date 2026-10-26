@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BD Credit Cards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <h1>BD Credit Cards</h1>
+      <nav class="tabs">
+        <a href="#cards">Cards</a>
+        <a href="#compare">Compare <span id="compareCount" class="pill">0</span></a>
+        <a href="#eligibility">Eligibility</a>
+        <a href="#offers">Offers</a>
+      </nav>
+      <span class="muted small" id="updated"></span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Cards -->
+    <section id="tab-cards" class="tab">
+      <div class="layout">
+        <aside class="filters" id="filters">
+          <div class="filter-head">
+            <strong>Filters</strong>
+            <button type="button" class="link" id="resetFilters">Reset</button>
+          </div>
+          <label class="field">Max annual fee (BDT)
+            <input type="number" id="fMaxFee" min="0" step="500" placeholder="Any">
+          </label>
+          <label class="field">My monthly income (BDT)
+            <input type="number" id="fIncome" min="0" step="5000" placeholder="Any">
+          </label>
+          <label class="field">Fee waived within (txns/yr)
+            <input type="number" id="fTxns" min="0" step="1" placeholder="Any">
+          </label>
+          <label class="field">Type
+            <select id="fType">
+              <option value="">Any</option>
+              <option value="conv">Conventional</option>
+              <option value="islamic">Islamic</option>
+            </select>
+          </label>
+          <fieldset id="fFeatures"><legend>Must have</legend></fieldset>
+          <fieldset id="fBank"><legend>Bank</legend></fieldset>
+          <fieldset id="fNetwork"><legend>Network</legend></fieldset>
+          <fieldset id="fTier"><legend>Tier</legend></fieldset>
+          <fieldset id="fProgram"><legend>Lounge program</legend></fieldset>
+          <fieldset id="fEmployment"><legend>Employment</legend></fieldset>
+        </aside>
+
+        <div>
+          <div class="toolbar">
+            <input type="search" id="search" placeholder="Search card, bank, perk (e.g. Priority Pass, golf, cashback)">
+            <select id="sort">
+              <option value="bank">Bank A–Z</option>
+              <option value="fee">Annual fee: low to high</option>
+              <option value="waiver">Fewest txns to waive fee</option>
+              <option value="income">Min income: low to high</option>
+              <option value="tier">Tier: premium first</option>
+              <option value="rate">Interest rate: low to high</option>
+            </select>
+            <label class="check"><input type="checkbox" id="groupBank" checked> Group by bank</label>
+          </div>
+          <p class="muted small" id="resultCount"></p>
+          <div class="grid" id="cardGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compare -->
+    <section id="tab-compare" class="tab" hidden>
+      <div class="toolbar">
+        <h2>Compare</h2>
+        <button type="button" class="link" id="clearCompare">Clear all</button>
+      </div>
+      <p class="muted small">Tick "Compare" on up to 4 cards in the Cards tab.</p>
+      <div class="table-scroll" id="compareTable"></div>
+    </section>
+
+    <!-- Eligibility -->
+    <section id="tab-eligibility" class="tab" hidden>
+      <h2>Which cards can I get?</h2>
+      <form id="eligForm" class="elig-form">
+        <label class="field">Monthly income (BDT)
+          <input type="number" name="income" min="0" step="1000" required>
+        </label>
+        <label class="field">Age
+          <input type="number" name="age" min="18" max="80" required>
+        </label>
+        <label class="field">Employment
+          <select name="employment">
+            <option value="salaried">Salaried</option>
+            <option value="business">Business</option>
+            <option value="self-employed">Self-employed / professional</option>
+            <option value="landlord">Landlord (rental income)</option>
+            <option value="student">Student</option>
+          </select>
+        </label>
+        <button type="submit" class="btn">Check</button>
+      </form>
+      <div id="eligResult"></div>
+    </section>
+
+    <!-- Offers -->
+    <section id="tab-offers" class="tab" hidden>
+      <div class="toolbar">
+        <input type="search" id="offerSearch" placeholder="Search merchant or offer">
+        <select id="offerBank"><option value="">All banks</option></select>
+        <label class="check"><input type="checkbox" id="showExpired"> Show expired</label>
+      </div>
+      <div class="chips" id="offerCats"></div>
+      <p class="muted small" id="offerCount"></p>
+      <div class="grid offers" id="offerGrid"></div>
+    </section>
+  </main>
+
+  <dialog id="detail">
+    <form method="dialog"><button class="close" aria-label="Close">×</button></form>
+    <div id="detailBody"></div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
